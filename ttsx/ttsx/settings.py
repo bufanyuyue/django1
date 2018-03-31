@@ -14,13 +14,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+import sys
+sys.path.insert(1,os.path.join(BASE_DIR,'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^#474(&2zy1jf+wnw5deo04*667*l6f&&yvma4dlif9s++#js#'
+SECRET_KEY = 's8lh1dduiyg3t^kh=5)2dv01*_&w2v-43w0i#9@t6#4%p&pwl('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tt_cart',
+    'tt_user',
+    'tt_order',
+    'tt_goods',
+    'tinymce'
+
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +63,8 @@ ROOT_URLCONF = 'ttsx.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +85,12 @@ WSGI_APPLICATION = 'ttsx.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ttsx_bj25',
+        'HOST':'localhost',
+        'POST':'3306',
+        'USER':'root',
+        'PASSWORD':'mysql',
     }
 }
 
@@ -85,9 +98,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans' #'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE =  'Asia/Shanghai' #'UTC'
 
 USE_I18N = True
 
@@ -100,3 +113,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL ='tt_user.User'
